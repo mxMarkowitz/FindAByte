@@ -1,0 +1,63 @@
+390900 Fixed
+391015 Fixed Created before commissions 
+391038 Fixed Unknown resaved
+391093 Fixed was one of the records with improper sales rep
+391101 Fixed 2471
+391124 No sales rep on sales order, but a sales rep on the invoice
+391151 Fixed
+391262 Fixed unknown resaved (sales order was correct)
+391263 Fixed unknown
+391264 Different sales order form
+391326 Fixed 2471
+391386 Fixed 2471
+391405 Fixed 2471
+391410 Fixed 2471
+391427 Fixed 2471
+391431 Fixed unknown resaved
+391433 Different sales order form
+391506 Fixed
+391507 Fixed 2471
+391509 Fixed 2471
+391514 Fixed 2471
+391558 Fixed 
+391582 Fixed Has a 2471, maye be stopping the script
+391598 Fixed was one of the improper sales reps
+391611 Fixed Item is assembly 
+391617 Fixed 2471
+391618 Fixed ERROR: Cannot call method "split" of null
+391626 Fixed 2471
+391636 Fixed 2471
+391655 Fixed 2471
+391725 Fixed ERROR: Cannot call method "split" of null
+391761 Fixed ERROR: Cannot call method "split" of null
+391783 Fixed was one of improper sales reps
+391786 Fixed 2471
+391790 Fixed 2471
+391792 Fixed 2471
+391793 Fixed 2471
+391794 Shipping charge, no commission
+391795 Fixed ERROR: Cannot call method "split" of null
+391815 Fixed 2471
+391845 Fixed ERROR: Cannot call method "split" of null
+391870 Fixed 2471
+391883 Inactive item MMFS2DC. ERROR: Invalid custrecord_360_com_item reference key 2373.
+391911 Fixed ERROR: Cannot call method "split" of null
+391914 Fixed ERROR: Cannot call method "split" of null
+391930 Fixed ERROR: Cannot call method "split" of null
+391947 Fixed Unknown resaved
+391961 Fixed 2471
+391990 Fixed ERROR: Cannot call method "split" of null
+391998 Fixed Unknown resaved
+392012 Fixed
+392015 Fixed
+392035 Fixed ERROR: Cannot call method "split" of null
+392045 Fixed ERROR: Cannot call method "split" of null
+392095 Fixed ERROR: Cannot call method "split" of null
+392163 Fixed ERROR: Cannot call method "split" of null
+392165 Fixed 2471
+392233 Fixed ERROR: Cannot call method "split" of null
+392238 Fixed ERROR: Cannot call method "split" of null
+392258 Fixed ERROR: Cannot call method "split" of null
+392290 Fixed was split error
+
+The Errors are occuring on the same subset of items that are Assembly/Bill of Materials.

@@ -1,0 +1,236 @@
+<html><head>
+	<style type="text/css">
+		h2 {
+			margin: 0 0 5px 0;
+		}
+		h3 {
+			margin: 0 0 0 20px;
+		}
+		td {
+    		//border-right: 1px solid #cbcbcb;
+    		padding: 0.5em;
+    		font-weight: bold;
+		}
+		table {
+		    border-spacing: 0;
+		    border-collapse: collapse;
+		    border: 1px solid #cbcbcb;
+		    width: 100%;
+		    font-size: 11px;
+		}
+		th {
+		    border: 1px solid #cbcbcb; 
+		    padding: 0.5em;
+		    text-align: left;
+		}
+		body {
+		    font-family: Verdana;
+		    font-size: 11px;
+		    color: #666;
+		}
+		thead {
+			background: #e0e0e0;
+		}
+		.menuBar{
+			height: 50px;
+    		width: 100%;
+    		margin-bottom: 10px;
+		}
+		.menuButton{
+			float: right;
+    		height: 100%;
+    		width: 50px;
+    		background: #ccc;
+    		text-align: center;
+    		line-height: 50px;
+    		border: 1px solid #cbcbcb;
+    		background: #e0e0e0;
+		}
+		.reviewHead{
+			//padding: .5em 2em;
+		}
+		select{
+			color: #666;
+		}
+		.selectContainer{
+			width: 60%;
+    		height: 100%;
+    		float: left;        
+    		background: #e0e0e0;
+    		border-radius: 0;
+    		border: 1px solid #cbcbcb;
+		}
+		.listSelect{
+			height: inherit;
+    		width: 100%;
+    		font-size: 22px;       
+    		line-height: 50px;
+    		border: none;
+    		background: #e0e0e0;
+    		border-radius: 0;
+		}
+
+		.ui-dialog{
+			//display: none;
+			background: white;
+			border: 1px solid lightgray;
+			padding: 10px
+		}
+		#dialog-form fieldset{
+			border: none;
+		}
+		.dialog-form-lbl-contatiner{
+    		width: 20%;
+    		float: left;
+		}
+		.dialog-form-input-contatiner input {
+			width: 100%
+		}
+		.dialog-form-input-contatiner{
+    		width: 80%;
+    		float: left;
+		}
+		.ui-dialog-title{
+			display: none;
+		}
+		.ui-dialog-titlebar-close{
+			display: none;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="dialog-form" title="Create new user">
+  		<p class="validateTips">Add a new location</p>
+  		<form>
+  			<fieldset>
+  				<div>
+  					<div class="dialog-form-lbl-contatiner">
+    					<label for="name">Name</label>
+    				</div>
+    				<div class="dialog-form-input-contatiner">
+    					<input type="text" name="name" id="name" class="text ui-widget-content ui-	corner-all">
+    				</div>
+    			</div>
+    			<div>
+    				<div class="dialog-form-lbl-contatiner">
+    					<label for="style">Style</label>
+    				</div>
+    				<div class="dialog-form-input-contatiner">
+    					<input type="text" name="style" id="style" value="" class="text ui-widget-	content ui-corner-all">
+    				</div>
+    			</div>
+    			<div>
+    				<div class="dialog-form-lbl-contatiner">
+    					<label for="review">Review</label>
+    				</div>
+    				<div class="dialog-form-input-contatiner">
+    					<input type="text" name="review" id="review" value="" class="text ui-	widget-content ui-corner-all">
+    				</div>
+    			</div>
+    			<div>
+    				<div class="dialog-form-lbl-contatiner">
+    					<label for="review">Location</label>
+    				</div>
+    				<div class="dialog-form-input-contatiner">
+    					<input type="text" name="location" id="location" value="" class="text ui-	widget-content ui-corner-all">
+    				</div>
+    			</div>
+  			</fieldset>
+  		</form>
+	</div>
+	<div class="menuBar">
+  		<div class="selectContainer">
+ 			<select class="listSelect" id="listSelect">
+    			<option selected="selected">-- Choose a list --</option>
+    		</select>
+    	</div>
+    	<div class="menuButton" onclick="OpenAddItemPopup()">
+    		+ Item
+    	</div>
+    	<div class="menuButton" style="margin-right: 5px">
+    		+ List
+    	</div>
+    </div>
+	<table id="mainList">
+		<thead>
+			<tr>
+				<th style="display: none"></th>
+				<th style="width: 20px"></th>
+				<th> Name </th>
+				<th> Style </th>
+				<th class="reviewHead"> Review </th>
+				<th> Locations </th>
+			</tr>
+		</thead>
+		<tbody id="mainList-body">
+			<tr>
+				<td> <input class="listCheck" type="checkbox"> </td>
+				<td> Sakana </td>
+				<td> Sushi </td>
+				<td id="reviewTest"></td>
+				<td>  </td>
+			</tr>
+			<tr>
+				<td> <input class="listCheck" type="checkbox"> </td>
+				<td> Boulders on Broadway </td>
+				<td> Bar </td>
+				<td id="reviewTest2"></td>
+				<td>  </td>
+			</tr>
+			<tr>
+				<td> <input class="listCheck" type="checkbox"> </td>
+				<td> Fate </td>
+				<td> Brewery </td>
+				<td id="reviewTest3"></td>
+				<td>  </td>
+			</tr>
+			<tr>
+				<td> <input class="listCheck" type="checkbox"> </td>
+				<td> Amys Baking Company </td>
+				<td> Shit </td>
+				<td id="reviewTest4"></td>
+				<td>  </td>
+			</tr>
+		</tbody>
+	</table>
+	<div id="item_1" style="
+    	height: 100px;  
+    	border: 1px solid #95F23C;
+    	border-spacing: 0; border-collapse: collapse;
+    	margin-top: 10px;
+    	margin-bottom: 10px;
+    	padding: 10px;">
+    	<div>
+    		<h2 style="margin: 0 0 5px 0;">Name</h2>
+    		<h3 style="margin: 0 0 0 20px;">location</h3>
+    	</div>
+    	<div style="
+    		width: 50%;
+    		float: left;
+    		margin-top: 20px;">
+    		<h2 style="margin: 0;">Review</h2>
+    	</div>
+    	<div style="
+    		width: 50%;
+    		float: right;
+    		margin-top: 20px;">
+    		<h2 style="margin: 0;">Style</h2>
+    	</div>
+    </div>
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="js/store.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/jquery.raty.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+	<link rel="stylesheet" href="/css/jquery-ui-1.10.4.custom.min.css">
+  
+	<script type="text/javascript">
+			
+	app.init();
+		$('#reviewTest').raty({ score: 4 });
+		$('#reviewTest2').raty({ score: 5 });
+		$('#reviewTest3').raty({ score: 4 });
+		$('#reviewTest4').raty({ score: 0 });
+	</script>
+</body></html>
