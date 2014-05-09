@@ -10,16 +10,17 @@
     		//border-right: 1px solid #cbcbcb;
     		padding: 0.5em;
     		font-weight: bold;
+    		max-width: 100px;
+			overflow: auto;
 		}
 		table {
 		    border-spacing: 0;
 		    border-collapse: collapse;
-		    border: 1px solid #cbcbcb;
 		    width: 100%;
 		    font-size: 11px;
 		}
 		th {
-		    border: 1px solid #cbcbcb; 
+		    border-bottom: 1px solid #cbcbcb; 
 		    padding: 0.5em;
 		    text-align: left;
 		}
@@ -27,24 +28,29 @@
 		    font-family: Verdana;
 		    font-size: 11px;
 		    color: #666;
+		    //width: 100%;
 		}
 		thead {
-			background: #e0e0e0;
+			//background: #e0e0e0;
 		}
 		.menuBar{
 			height: 50px;
-    		width: 100%;
-    		margin-bottom: 10px;
+			width: 100%;
+			margin-bottom: 10px;
+			float: left;
+			position: relative;
+			text-align: center;
 		}
 		.menuButton{
 			float: right;
     		height: 100%;
     		width: 50px;
-    		background: #ccc;
     		text-align: center;
     		line-height: 50px;
-    		border: 1px solid #cbcbcb;
-    		background: #e0e0e0;
+		}
+		.menuButton:active{
+			background: lightgray;
+			color: white;
 		}
 		.reviewHead{
 			//padding: .5em 2em;
@@ -53,31 +59,41 @@
 			color: #666;
 		}
 		.selectContainer{
-			width: 60%;
-    		height: 100%;
-    		float: left;        
-    		background: #e0e0e0;
-    		border-radius: 0;
-    		border: 1px solid #cbcbcb;
+			width: 70%;
+			height: 100%;
+			border-radius: 0;
+			margin: 0 auto;
+			position: relative;
+			text-align: center;
 		}
 		.listSelect{
 			height: inherit;
-    		width: 100%;
-    		font-size: 22px;       
-    		line-height: 50px;
-    		border: none;
-    		background: #e0e0e0;
-    		border-radius: 0;
+			font-size: 22px;
+			line-height: 50px;
+			border: none;
+			background: none;
+			border-radius: 0;
+			-webkit-appearance: none;
+			text-align: center;
+			margin: 0 auto;
 		}
 
 		.ui-dialog{
 			//display: none;
 			background: white;
 			border: 1px solid lightgray;
-			padding: 10px
+			padding: 10px;
+			max-width: 500px;
+		}
+		#dialog-form{
+			height: auto;
+
+			max-height: 200px !important;
+			max-width: 400px !important;
 		}
 		#dialog-form fieldset{
 			border: none;
+
 		}
 		.dialog-form-lbl-contatiner{
     		width: 20%;
@@ -97,10 +113,135 @@
 			display: none;
 		}
 
+		.dialog-Form{
+
+		}
+
+		.ui-button{
+			margin: 0 auto;
+			-webkit-appearance: none;
+			border: none;
+			background: none;
+			color: #666;
+		}
+		.ui-dialog-buttonpane{
+			margin: 0 auto;
+			text-align: center;
+		}
+		#item_1{
+			display: none;
+		}
+
+		div.listMenu {
+			position: absolute;
+    		width: 200px;
+    		border-bottom: none;
+    		right: -250;
+    		top: 5%;
+    		background: white;
+    		border-collapse: collapse;
+		}
+		div.listMenu-item {
+			width: 100%; height: 50px;
+		    border-bottom: 1px solid lightgray;
+		    border-collapse: collapse;
+		}
+		div.listMenu-item-bottom {
+		    width: 100%; height: 50px;
+		    border-collapse: collapse;
+		}
+		div.listMenu-item-icon {
+		    width: 25%;
+		    height: 100%;
+		    float: left;
+		    text-align: center;
+		    line-height: 4.5;
+		}
+		div.listMenu-item-text {
+		    width: 75%;
+		    height: 100%;
+		    float: right;
+		    text-align: center; line-height: 4.5;
+		}
+		div.listMenu-overlay {
+			display: none;
+   			position: absolute;
+   			width: 100%;
+   			height: 100%;
+   			background: lightgray;
+   			opacity: .5;
+   			left: 0;
+   			top: 0;
+		}
+		.listMenu-item-overlay:active{
+			font: white !important;
+			opacity: .5;
+		}
+		.listMenu-item-overlay {
+    		position: absolute;
+    		background: lightgray;
+    		width: 100%;
+    		height: inherit;
+    		opacity: 0;
+		}
+
+		div.menu {
+    		position: absolute;
+    		width: 200px;
+    		border-bottom: none;
+    		left: -250;
+    		top: 5%;
+    		background: white;
+    		border-collapse: collapse;
+		}
+		div.menu-item {
+		    width: 100%; height: 50px;
+		    border-bottom: 1px solid lightgray;
+		    border-collapse: collapse;
+		}
+		div.menu-item-bottom {
+		    width: 100%; height: 50px;
+		    border-collapse: collapse;
+		}
+		div.menu-item-icon {
+		    width: 25%;
+		    height: 100%;
+		    float: left;
+		    text-align: center;
+		    line-height: 4.5;
+		}
+		div.menu-item-text {
+		    width: 75%;
+		    height: 100%;
+		    float: right;
+		    text-align: center; line-height: 4.5;
+		}
+		div.menu-overlay {
+			display: none;
+   			position: absolute;
+   			width: 100%;
+   			height: 100%;
+   			background: lightgray;
+   			opacity: .5;
+   			left: 0;
+   			top: 0;
+		}
+		.menu-item-overlay:active{
+			font: white !important;
+			opacity: .5;
+		}
+		.menu-item-overlay {
+    		position: absolute;
+    		background: lightgray;
+    		width: 100%;
+    		height: inherit;
+    		opacity: 0;
+		}
+
 	</style>
 </head>
 <body>
-	<div id="dialog-form" title="Create new user">
+	<div id="dialog-form" class="dialog-Form" title="Create new item">
   		<p class="validateTips">Add a new location</p>
   		<form>
   			<fieldset>
@@ -139,18 +280,34 @@
   			</fieldset>
   		</form>
 	</div>
+	<div id="listCreation-form" class="dialog-Form"  title="Create a new List">
+		<p class="validateTips">Add a new location</p>
+		<form>
+			<fieldset>
+				<div>
+  					<div class="dialog-form-lbl-contatiner">
+    					<label for="name">Name</label>
+    				</div>
+    				<div class="dialog-form-input-contatiner">
+    					<input type="text" name="name" id="name" class="text ui-widget-content ui-	corner-all">
+    				</div>
+    			</div>
+			</fieldset>
+		</form>
+	</div>
 	<div class="menuBar">
+		<div class="menuButton" onclick="openMenu()" style="float: left">
+			Menu
+    	</div>
+    	<div class="menuButton" onclick="OpenAddItemPopup()">
+    		+
+    	</div>
   		<div class="selectContainer">
  			<select class="listSelect" id="listSelect">
     			<option selected="selected">-- Choose a list --</option>
     		</select>
     	</div>
-    	<div class="menuButton" onclick="OpenAddItemPopup()">
-    		+ Item
-    	</div>
-    	<div class="menuButton" style="margin-right: 5px">
-    		+ List
-    	</div>
+    	
     </div>
 	<table id="mainList">
 		<thead>
@@ -218,12 +375,50 @@
     		<h2 style="margin: 0;">Style</h2>
     	</div>
     </div>
+    <div class="menu-overlay"  onclick="closeMenu()"></div>
+    <div class="leftMenu">
+    	<div class="leftMenu-title">
+    		<div class="leftMenu-title-icon">Menu</div>
+    		<div class="leftMenu-title-text"></div>
+    	</div>
+  		<div class="leftMenu-item">
+  		  	<div class="leftMenu-item-icon">Icon</div>
+  			<div class="leftMenu-item-text">Action</div>
+  			<div class="leftMenu-item-overlay"></div>
+  		</div>
+  		<div class="leftMenu-item-bottom">
+  		  	<div class="leftMenu-item-icon"></div>
+  			<div class="leftMenu-item-text">close</div>
+  			<div class="leftMenu-item-overlay"></div>
+  		</div>
+	</div>
+	<div class="listMenu">
+		<div class="listMenu-item">
+  		  	<div class="menu-item-icon">Icon</div>
+  			<div class="menu-item-text">item</div>
+  			<div class="menu-item-overlay"></div>
+  		</div>
+  		<div class="listMenu-item">
+  		  	<div class="menu-item-icon">Icon</div>
+  			<div class="menu-item-text">list</div>
+  			<div class="menu-item-overlay"></div>
+  		</div>
+  		<div class="listMenu-item">
+  		  	<div class="menu-item-icon"></div>
+  			<div class="menu-item-text">close</div>
+  			<div class="menu-item-overlay"></div>
+  		</div>
+	</div>
+
 	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="js/store.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
+	<!--<script type="text/javascript" src="js/menu.js"></script>-->
 	<script type="text/javascript" src="js/jquery.raty.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
-	<link rel="stylesheet" href="/css/jquery-ui-1.10.4.custom.min.css">
+
+	<link rel="stylesheet" href="Libs/LeftMenu/left-menu.css">
+	<script type="text/javascript" src="Libs/LeftMenu/left-menu.js"></script>
   
 	<script type="text/javascript">
 			
