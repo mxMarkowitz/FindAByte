@@ -22,12 +22,16 @@ app.init = function (){
 	//if no db then create a new one
 	//app.webdb.db.open();
 	app.lists = InitAllLists();
-	populateListSelector();
-	populateListSelect();
+	//populateListSelector();
+	//populateListSelect();
 	initAddItemDialog();
 	initAddListDialog();
 	//initMenuButton();
 	OnListChange();
+	initMenus();
+	initListCollapse($('#item_2'));
+	initListCollapse($('#item_3'));
+	initListCollapse($('#item_4'));
 }
 
 
@@ -73,6 +77,7 @@ function populateListSelect(){
 		app.selectedList = {id:$(this).val(), val: store.get($(this).val())};
 	});
 }
+/*
 function openMenu(){
 	$('.menu-overlay').show();
 	$('.menu').animate({
@@ -84,7 +89,7 @@ function closeMenu(){
 	$('.menu').animate({
 		left: -250
 	}, 200);
-}
+}*/
 
 function initAddItemDialog(){
 	$('#dialog-form').dialog({

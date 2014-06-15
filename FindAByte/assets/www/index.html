@@ -6,6 +6,9 @@
 		h3 {
 			margin: 0 0 0 20px;
 		}
+		#mainList{
+			display: none;
+		}
 		td {
     		//border-right: 1px solid #cbcbcb;
     		padding: 0.5em;
@@ -185,59 +188,6 @@
     		opacity: 0;
 		}
 
-		div.menu {
-    		position: absolute;
-    		width: 200px;
-    		border-bottom: none;
-    		left: -250;
-    		top: 5%;
-    		background: white;
-    		border-collapse: collapse;
-		}
-		div.menu-item {
-		    width: 100%; height: 50px;
-		    border-bottom: 1px solid lightgray;
-		    border-collapse: collapse;
-		}
-		div.menu-item-bottom {
-		    width: 100%; height: 50px;
-		    border-collapse: collapse;
-		}
-		div.menu-item-icon {
-		    width: 25%;
-		    height: 100%;
-		    float: left;
-		    text-align: center;
-		    line-height: 4.5;
-		}
-		div.menu-item-text {
-		    width: 75%;
-		    height: 100%;
-		    float: right;
-		    text-align: center; line-height: 4.5;
-		}
-		div.menu-overlay {
-			display: none;
-   			position: absolute;
-   			width: 100%;
-   			height: 100%;
-   			background: lightgray;
-   			opacity: .5;
-   			left: 0;
-   			top: 0;
-		}
-		.menu-item-overlay:active{
-			font: white !important;
-			opacity: .5;
-		}
-		.menu-item-overlay {
-    		position: absolute;
-    		background: lightgray;
-    		width: 100%;
-    		height: inherit;
-    		opacity: 0;
-		}
-
 	</style>
 </head>
 <body>
@@ -296,10 +246,10 @@
 		</form>
 	</div>
 	<div class="menuBar">
-		<div class="menuButton" onclick="openMenu()" style="float: left">
+		<div class="menuButton" onclick="openLeftMenu()" style="float: left">
 			Menu
     	</div>
-    	<div class="menuButton" onclick="OpenAddItemPopup()">
+    	<div class="menuButton" onclick="openRightMenu()">
     		+
     	</div>
   		<div class="selectContainer">
@@ -309,7 +259,7 @@
     	</div>
     	
     </div>
-	<table id="mainList">
+	<!--<table id="mainList">
 		<thead>
 			<tr>
 				<th style="display: none"></th>
@@ -350,7 +300,7 @@
 				<td>  </td>
 			</tr>
 		</tbody>
-	</table>
+	</table>-->
 	<div id="item_1" style="
     	height: 100px;  
     	border: 1px solid #95F23C;
@@ -375,50 +325,141 @@
     		<h2 style="margin: 0;">Style</h2>
     	</div>
     </div>
-    <div class="menu-overlay"  onclick="closeMenu()"></div>
-    <div class="leftMenu">
-    	<div class="leftMenu-title">
-    		<div class="leftMenu-title-icon">Menu</div>
-    		<div class="leftMenu-title-text"></div>
+    <div id="item_2" class="listContainer">
+    	<div id="item_2_top" class="listCont_topRow">
+  			<div class="listCont_topRow_name">
+    			Sakana
+    		</div>
+  			<div class="listCont_topRow_location">
+    			Ahwatukee
+    		</div>
+    		<div class="listCont_topRow_review">
+    			5 stars
+    		</div>
+		</div>
+		<div class="listCont_midRow">
+  			<div class="listCont_midRow_styles">
+  				Sushi, Japanese, Teppanyaki
+  			</div>
+		</div>
+		<div class="listCont_botRow">
+  			<div class="listCont_botRow_maps">
+  				Maps
+  			</div>
+			<div class="listCont_botRow_fourSquare">
+				FourSquare
+			</div>
+		</div>
+	</div>
+	<div id="item_3" class="listContainer">
+    	<div id="item_3_top" class="listCont_topRow">
+  			<div class="listCont_topRow_name">
+    			Forefathers
+    		</div>
+  			<div class="listCont_topRow_location">
+    			Chandler
+    		</div>
+    		<div class="listCont_topRow_review">
+    			5 stars
+    		</div>
+		</div>
+		<div class="listCont_midRow">
+  			<div class="listCont_midRow_styles">
+  				American, Philly Cheese Steaks
+  			</div>
+		</div>
+		<div class="listCont_botRow">
+  			<div class="listCont_botRow_maps">
+  				Maps
+  			</div>
+			<div class="listCont_botRow_fourSquare">
+				FourSquare
+			</div>
+		</div>
+	</div>
+	<div id="item_4" class="listContainer">
+    	<div id="item_4_top" class="listCont_topRow">
+  			<div class="listCont_topRow_name">
+    			Hodori
+    		</div>
+  			<div class="listCont_topRow_location">
+    			Mesa
+    		</div>
+    		<div class="listCont_topRow_review">
+    			5 stars
+    		</div>
+		</div>
+		<div class="listCont_midRow">
+  			<div class="listCont_midRow_styles">
+  				Korean, Korean BBQ
+  			</div>
+		</div>
+		<div class="listCont_botRow">
+  			<div class="listCont_botRow_maps">
+  				Maps
+  			</div>
+			<div class="listCont_botRow_fourSquare">
+				FourSquare
+			</div>
+		</div>
+	</div>
+    <div id="menu-overlay" class="menu-overlay"  onclick="closeMenu()"></div>
+    <div id="leftMenu" class="menu leftMenu">
+    	<div class="menu-title left">
+    		<div class="menu-title-icon left"></div>
+    		<div class="menu-title-text left">Menu</div>
     	</div>
-  		<div class="leftMenu-item">
-  		  	<div class="leftMenu-item-icon">Icon</div>
-  			<div class="leftMenu-item-text">Action</div>
-  			<div class="leftMenu-item-overlay"></div>
+  		<div class="menu-item left">
+  		  	<div class="menu-item-icon left">Icon</div>
+  			<div class="menu-item-text left">Change List</div>
+  			<div class="menu-item-overlay left"></div>
   		</div>
-  		<div class="leftMenu-item-bottom">
-  		  	<div class="leftMenu-item-icon"></div>
-  			<div class="leftMenu-item-text">close</div>
-  			<div class="leftMenu-item-overlay"></div>
+  		<div class="menu-item left">
+  		  	<div class="menu-item-icon left">Icon</div>
+  			<div class="menu-item-text left">Quit App</div>
+  			<div class="menu-item-overlay left"></div>
+  		</div>
+  		<div class="menu-item-bottom left">
+  		  	<div class="menu-item-icon left"></div>
+  			<div class="menu-item-text left">close</div>
+  			<div class="menu-item-overlay left" onclick="closeMenu()"></div>
   		</div>
 	</div>
-	<div class="listMenu">
-		<div class="listMenu-item">
-  		  	<div class="menu-item-icon">Icon</div>
-  			<div class="menu-item-text">item</div>
-  			<div class="menu-item-overlay"></div>
+	<div id="rightMenu" class="menu rightMenu">
+    	<div class="menu-title right">
+    		<!--<div class="menu-title-icon right"></div>-->
+    		<div class="menu-title-text right">Add New...</div>
+    	</div>
+  		<div class="menu-item right">
+  		  	<div class="menu-item-icon right">Icon</div>
+  			<div class="menu-item-text right">Location</div>
+  			<div class="menu-item-overlay right"></div>
   		</div>
-  		<div class="listMenu-item">
-  		  	<div class="menu-item-icon">Icon</div>
-  			<div class="menu-item-text">list</div>
-  			<div class="menu-item-overlay"></div>
+  		<div class="menu-item right">
+  		  	<div class="menu-item-icon right">Icon</div>
+  			<div class="menu-item-text right">List</div>
+  			<div class="menu-item-overlay right"></div>
   		</div>
-  		<div class="listMenu-item">
-  		  	<div class="menu-item-icon"></div>
-  			<div class="menu-item-text">close</div>
-  			<div class="menu-item-overlay"></div>
+  		<div class="menu-item-bottom right">
+  		  	<div class="menu-item-icon right"></div>
+  			<div class="menu-item-text right">close</div>
+  			<div class="menu-item-overlay right" onclick="closeMenu()"></div>
   		</div>
 	</div>
 
 	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="js/store.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/store/datastore.js"></script>
 	<!--<script type="text/javascript" src="js/menu.js"></script>-->
 	<script type="text/javascript" src="js/jquery.raty.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
 
-	<link rel="stylesheet" href="Libs/LeftMenu/left-menu.css">
-	<script type="text/javascript" src="Libs/LeftMenu/left-menu.js"></script>
+	<link rel="stylesheet" href="Libs/Menu/menu.css">
+	<script type="text/javascript" src="Libs/Menu/menu.js"></script>
+
+	<link rel="stylesheet" href="Libs/List/list.css">
+	<script type="text/javascript" src="Libs/List/list.js"></script>
   
 	<script type="text/javascript">
 			
