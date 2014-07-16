@@ -13,25 +13,74 @@ var app= {};
 	app.webdb = {};
 	app.webdb.db = null;
 	app.lists = [];
-	app.selectedList = null;
+	app.selectedList = null,
+	db = {},
+	listId = '';
 
 //init function
 app.init = function (){
 	//read db from file
 
-	//if no db then create a new one
-	//app.webdb.db.open();
-	app.lists = InitAllLists();
-	//populateListSelector();
-	//populateListSelect();
 	initAddItemDialog();
 	initAddListDialog();
+	initEditItemDialog();
 	//initMenuButton();
-	OnListChange();
+	//OnListChange();
 	initMenus();
-	initListCollapse($('#item_2'));
-	initListCollapse($('#item_3'));
-	initListCollapse($('#item_4'));
+	db = new dataStore();
+	//db.initDataStore();
+	//for testing
+	//db.destroyDataStore();
+	db.initDataStore();
+	populateSel();
+	//testInit();
+	//initItemEvents($('#item_2'), openEditItemPopop);
+	//initItemEvents($('#item_3'), openEditItemPopop);
+	//initItemEvents($('#item_4'), openEditItemPopop);
+}
+function populateSel(){
+	var lists = db.getAllLists();
+	$('#listSelect option[value!=null]').remove();
+	for (var prop in lists){
+		$('#listSelect').append($("<option></option>")
+						.attr('value', prop)
+						.text(lists[prop].name));
+	}
+	$('#listSelect').on('change', function(e){
+		listId = this.value;
+		populateList(listId);
+	})
+}
+function populateList(list){
+	$('body div[class="listContainer"]').remove();
+	var vals = db.getList(list).items;
+	for (var prop in vals){
+		if (typeof vals[prop] === 'object'){
+			addItem(vals[prop], $('body'), openEditItemPopop);
+		}
+	}
+}
+
+function testInit(){
+	var testList = {
+	'name' : 'testList',
+	'description' : 'testListDescription',
+	'items' : {}
+	};
+	listId = db.createList(testList);
+
+	var i = 5;
+	while (i != 0){
+		db.createItem({
+						'name' : 'testItemName2',
+						'location' : 'testLocation2',
+						'rating' : 5,
+						'tags' : [ 'tag1', 'tag2', 'tag3'],
+						'foursquare' : 'testF4link2',
+						'maps' : 'testMapsLink2'
+					},listId);
+	i--;
+	}
 }
 
 
@@ -77,31 +126,61 @@ function populateListSelect(){
 		app.selectedList = {id:$(this).val(), val: store.get($(this).val())};
 	});
 }
-/*
-function openMenu(){
-	$('.menu-overlay').show();
-	$('.menu').animate({
-		left: 0
-	}, 200);
-}
-function closeMenu(){
-	$('.menu-overlay').hide();
-	$('.menu').animate({
-		left: -250
-	}, 200);
-}*/
 
+//popup initialization functions
+function initEditItemDialog(){
+	$('#editItemDialog').dialog({
+		autoOpen: false,
+		position: { my: 'top+20', at: 'top', of: window },
+		modal: false,
+		buttons: {
+			'Save' : function() {
+				//addNewItem($('#name').val(), $('#style').val(), $('#location').val(), $('#review').val(), false);
+				var item = {
+					'id': $('#editIdInput').val(),
+					'name': $('#editNameInput').val(),
+					'location': $('#editLocationInput').val(),
+					'rating': parseInt($('#editReviewInput').val()),
+					'tags': $('#editStyleInput').val().split(','),
+					'foursquare': '',
+					'maps': ''
+				}
+				var id = db.editItem(item, listId);
+				updateItem(item, openEditItemPopop);
+				//clear form
+				$("#editItemDialog :input").each(function(){
+					$(this).val('');
+				});
+
+				$( this ).dialog( "close" );
+			},
+			Cancel: function() {
+          		$( this ).dialog( "close" );
+        	}
+		}
+	});
+}
 function initAddItemDialog(){
-	$('#dialog-form').dialog({
+	$('#addItemDialog').dialog({
 		autoOpen: false,
 		position: { my: 'top+20', at: 'top', of: window },
 		modal: false,
 		buttons: {
 			'Create' : function() {
-				addNewItem($('#name').val(), $('#style').val(), $('#location').val(), $('#review').val(), false);
-
+				//addNewItem($('#name').val(), $('#style').val(), $('#location').val(), $('#review').val(), false);
+				var newItem = {
+					'name': $('#name').val(),
+					'location': $('#location').val(),
+					'rating': Number($('#review').val()),
+					'tags': $('#style').val().split(','),
+					'foursquare': '',
+					'maps': ''
+				}
+				var id = db.createItem(newItem, listId);
+				newItem.id = id;
+				addItem(newItem, $('body'), openEditItemPopop);
 				//clear form
-				$("#dialog-form :input").each(function(){
+				$("#addItemDialog :input").each(function(){
 					$(this).val('');
 				});
 
@@ -122,6 +201,18 @@ function initAddListDialog(){
 			'Create' : function() {
 				//addNewItem($('#name').val(), $('#style').val(), $('#location').val(), $('#review').val(), false);
 
+				//create list
+				var tempList = {
+					'name' : $('#nameListInput').val(),
+					'description' : $('#descriptionListInput').val(),
+					'items' : {}
+				}
+				var listId = db.createList(tempList);
+				populateSel();
+				populateList(listId);
+				$('#listSelect').val(listId);
+				//switch to list
+
 				//clear form
 				$("#listCreation-form :input").each(function(){
 					$(this).val('');
@@ -136,20 +227,47 @@ function initAddListDialog(){
 	});
 }
 
-function test(){
-	createList('testList4');
+//Popup opening functions
+function openAddItemPopup(){
+	closeMenu(function(){
+		var tempheight = $(document).height()-50;
+		var tempwidth = $(document).width()-30;
+		$('#addItemDialog').dialog({
+			height: tempheight,
+			width: tempwidth
+		});
+		$('#addItemDialog').dialog('open');
+	});
 }
-
-function OpenAddItemPopup(){
+function openEditItemPopop(listItem){
 	var tempheight = $(document).height()-50;
 	var tempwidth = $(document).width()-30;
-	$('#dialog-form').dialog({
+	var item = db.getItem(getListItemId( listItem.attr('id') ), listId);
+	//set values
+	$('#editIdInput').val(item.id);
+	$('#editNameInput').val(item.name);
+	$('#editStyleInput').val(item.tags);	
+	$('#editLocationInput').val(item.location);
+	$('#editReviewInput').val(item.rating);
+
+	$('#editItemDialog').dialog({
 		height: tempheight,
 		width: tempwidth
 	});
-	$('#dialog-form').dialog('open');
+	$('#editItemDialog').dialog('open');
 }
-
+function openAddListPopup(){
+	closeMenu(function(){
+		var tempheight = $(document).height()-50;
+		var tempwidth = $(document).width()-30;
+		$('#listCreation-form').dialog({
+			height: tempheight,
+			width: tempwidth
+		});
+		$('#listCreation-form').dialog('open');
+	});
+}
+/*
 //-Start- Item Controls
 	//creates a new item, updates current list and updates on store
 	function addNewItem(name, style, location, review, visited){
@@ -163,10 +281,10 @@ function OpenAddItemPopup(){
 		updateCurrentList();
 		populateList(store.get(app.selectedList.id));
 	}
-//-End-
+//-End-*/
 
 //-Start- List Controls
-
+/*
 	//Creates list, sets in db, populates select, sets selected, populates list
 	function InitAllLists (){
 		var results = store.getAll();
@@ -203,7 +321,8 @@ function OpenAddItemPopup(){
 		initCheckEvent();
 	
 		console.log('end populateList');
-	}
+	}*/
+	/*
 	//Updates the list on a change
 	function OnListChange(){
 		var sel = document.getElementById('listSelect');
@@ -214,14 +333,14 @@ function OpenAddItemPopup(){
 				populateList(list);
 			} 
 		}
-	}
+	}*/
 	//Forces an update to a current list
-
+	/*
 	function updateCurrentList(){
 
 		store.set(app.selectedList.id, app.selectedList.val);
-	}
-
+	}*/
+	/*
 	//Creates a new list
 	function createList(listId){
 		if (!store.get(listId)){
@@ -235,7 +354,7 @@ function OpenAddItemPopup(){
 		} else {
 			alert('list name taken');
 		}
-	}
+	}*/
 //-End-
 
 //prototypes

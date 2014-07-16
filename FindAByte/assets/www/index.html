@@ -83,18 +83,19 @@
 
 		.ui-dialog{
 			//display: none;
+			position: absolute;
 			background: white;
 			border: 1px solid lightgray;
 			padding: 10px;
 			max-width: 500px;
 		}
-		#dialog-form{
+		.dialog-form{
 			height: auto;
 
 			max-height: 200px !important;
 			max-width: 400px !important;
 		}
-		#dialog-form fieldset{
+		.dialog-form fieldset{
 			border: none;
 
 		}
@@ -103,7 +104,8 @@
     		float: left;
 		}
 		.dialog-form-input-contatiner input {
-			width: 100%
+			width: 100%;
+			border: 1px solid lightgray;
 		}
 		.dialog-form-input-contatiner{
     		width: 80%;
@@ -114,10 +116,6 @@
 		}
 		.ui-dialog-titlebar-close{
 			display: none;
-		}
-
-		.dialog-Form{
-
 		}
 
 		.ui-button{
@@ -191,7 +189,7 @@
 	</style>
 </head>
 <body>
-	<div id="dialog-form" class="dialog-Form" title="Create new item">
+	<div id="addItemDialog" class="dialog-Form" title="Create new item">
   		<p class="validateTips">Add a new location</p>
   		<form>
   			<fieldset>
@@ -230,6 +228,46 @@
   			</fieldset>
   		</form>
 	</div>
+	<div id="editItemDialog" class="dialog-Form" title="Edit this item">
+		<p class="validateTips">Edit this item</p>
+  		<form>
+  			<fieldset>
+  				<input type="text" id="editIdInput" style="display:none">
+  				<div>
+  					<div class="dialog-form-lbl-contatiner">
+    					<label for="name">Name</label>
+    				</div>
+    				<div class="dialog-form-input-contatiner">
+    					<input type="text" name="name" id="editNameInput" class="text ui-widget-content ui-	corner-all">
+    				</div>
+    			</div>
+    			<div>
+    				<div class="dialog-form-lbl-contatiner">
+    					<label for="style">Style</label>
+    				</div>
+    				<div class="dialog-form-input-contatiner">
+    					<input type="text" name="style" id="editStyleInput" value="" class="text ui-widget-	content ui-corner-all">
+    				</div>
+    			</div>
+    			<div>
+    				<div class="dialog-form-lbl-contatiner">
+    					<label for="review">Review</label>
+    				</div>
+    				<div class="dialog-form-input-contatiner">
+    					<input type="text" name="review" id="editReviewInput" value="" class="text ui-	widget-content ui-corner-all">
+    				</div>
+    			</div>
+    			<div>
+    				<div class="dialog-form-lbl-contatiner">
+    					<label for="review">Location</label>
+    				</div>
+    				<div class="dialog-form-input-contatiner">
+    					<input type="text" name="location" id="editLocation" value="" class="text ui-	widget-content ui-corner-all">
+    				</div>
+    			</div>
+  			</fieldset>
+  		</form>
+	</div>
 	<div id="listCreation-form" class="dialog-Form"  title="Create a new List">
 		<p class="validateTips">Add a new location</p>
 		<form>
@@ -239,7 +277,13 @@
     					<label for="name">Name</label>
     				</div>
     				<div class="dialog-form-input-contatiner">
-    					<input type="text" name="name" id="name" class="text ui-widget-content ui-	corner-all">
+    					<input type="text" name="name" id="nameListInput" class="text ui-widget-content ui-	corner-all">
+    				</div>
+    				<div class="dialog-form-lbl-contatiner">
+    					<label for="description">Description</label>
+    				</div>
+    				<div class="dialog-form-input-contatiner">
+    					<input type="text" name="description" id="descriptionListInput" class="text ui-widget-content ui-	corner-all">
     				</div>
     			</div>
 			</fieldset>
@@ -254,155 +298,10 @@
     	</div>
   		<div class="selectContainer">
  			<select class="listSelect" id="listSelect">
-    			<option selected="selected">-- Choose a list --</option>
+    			<option selected disabled value=null>-- Choose a list --</option>
     		</select>
     	</div>
-    	
     </div>
-	<!--<table id="mainList">
-		<thead>
-			<tr>
-				<th style="display: none"></th>
-				<th style="width: 20px"></th>
-				<th> Name </th>
-				<th> Style </th>
-				<th class="reviewHead"> Review </th>
-				<th> Locations </th>
-			</tr>
-		</thead>
-		<tbody id="mainList-body">
-			<tr>
-				<td> <input class="listCheck" type="checkbox"> </td>
-				<td> Sakana </td>
-				<td> Sushi </td>
-				<td id="reviewTest"></td>
-				<td>  </td>
-			</tr>
-			<tr>
-				<td> <input class="listCheck" type="checkbox"> </td>
-				<td> Boulders on Broadway </td>
-				<td> Bar </td>
-				<td id="reviewTest2"></td>
-				<td>  </td>
-			</tr>
-			<tr>
-				<td> <input class="listCheck" type="checkbox"> </td>
-				<td> Fate </td>
-				<td> Brewery </td>
-				<td id="reviewTest3"></td>
-				<td>  </td>
-			</tr>
-			<tr>
-				<td> <input class="listCheck" type="checkbox"> </td>
-				<td> Amys Baking Company </td>
-				<td> Shit </td>
-				<td id="reviewTest4"></td>
-				<td>  </td>
-			</tr>
-		</tbody>
-	</table>-->
-	<div id="item_1" style="
-    	height: 100px;  
-    	border: 1px solid #95F23C;
-    	border-spacing: 0; border-collapse: collapse;
-    	margin-top: 10px;
-    	margin-bottom: 10px;
-    	padding: 10px;">
-    	<div>
-    		<h2 style="margin: 0 0 5px 0;">Name</h2>
-    		<h3 style="margin: 0 0 0 20px;">location</h3>
-    	</div>
-    	<div style="
-    		width: 50%;
-    		float: left;
-    		margin-top: 20px;">
-    		<h2 style="margin: 0;">Review</h2>
-    	</div>
-    	<div style="
-    		width: 50%;
-    		float: right;
-    		margin-top: 20px;">
-    		<h2 style="margin: 0;">Style</h2>
-    	</div>
-    </div>
-    <div id="item_2" class="listContainer">
-    	<div id="item_2_top" class="listCont_topRow">
-  			<div class="listCont_topRow_name">
-    			Sakana
-    		</div>
-  			<div class="listCont_topRow_location">
-    			Ahwatukee
-    		</div>
-    		<div class="listCont_topRow_review">
-    			5 stars
-    		</div>
-		</div>
-		<div class="listCont_midRow">
-  			<div class="listCont_midRow_styles">
-  				Sushi, Japanese, Teppanyaki
-  			</div>
-		</div>
-		<div class="listCont_botRow">
-  			<div class="listCont_botRow_maps">
-  				Maps
-  			</div>
-			<div class="listCont_botRow_fourSquare">
-				FourSquare
-			</div>
-		</div>
-	</div>
-	<div id="item_3" class="listContainer">
-    	<div id="item_3_top" class="listCont_topRow">
-  			<div class="listCont_topRow_name">
-    			Forefathers
-    		</div>
-  			<div class="listCont_topRow_location">
-    			Chandler
-    		</div>
-    		<div class="listCont_topRow_review">
-    			5 stars
-    		</div>
-		</div>
-		<div class="listCont_midRow">
-  			<div class="listCont_midRow_styles">
-  				American, Philly Cheese Steaks
-  			</div>
-		</div>
-		<div class="listCont_botRow">
-  			<div class="listCont_botRow_maps">
-  				Maps
-  			</div>
-			<div class="listCont_botRow_fourSquare">
-				FourSquare
-			</div>
-		</div>
-	</div>
-	<div id="item_4" class="listContainer">
-    	<div id="item_4_top" class="listCont_topRow">
-  			<div class="listCont_topRow_name">
-    			Hodori
-    		</div>
-  			<div class="listCont_topRow_location">
-    			Mesa
-    		</div>
-    		<div class="listCont_topRow_review">
-    			5 stars
-    		</div>
-		</div>
-		<div class="listCont_midRow">
-  			<div class="listCont_midRow_styles">
-  				Korean, Korean BBQ
-  			</div>
-		</div>
-		<div class="listCont_botRow">
-  			<div class="listCont_botRow_maps">
-  				Maps
-  			</div>
-			<div class="listCont_botRow_fourSquare">
-				FourSquare
-			</div>
-		</div>
-	</div>
     <div id="menu-overlay" class="menu-overlay"  onclick="closeMenu()"></div>
     <div id="leftMenu" class="menu leftMenu">
     	<div class="menu-title left">
@@ -433,12 +332,12 @@
   		<div class="menu-item right">
   		  	<div class="menu-item-icon right">Icon</div>
   			<div class="menu-item-text right">Location</div>
-  			<div class="menu-item-overlay right"></div>
+  			<div class="menu-item-overlay right" onclick="openAddItemPopup()"></div>
   		</div>
   		<div class="menu-item right">
   		  	<div class="menu-item-icon right">Icon</div>
   			<div class="menu-item-text right">List</div>
-  			<div class="menu-item-overlay right"></div>
+  			<div class="menu-item-overlay right" onclick="openAddListPopup()"></div>
   		</div>
   		<div class="menu-item-bottom right">
   		  	<div class="menu-item-icon right"></div>
@@ -463,7 +362,7 @@
   
 	<script type="text/javascript">
 			
-	app.init();
+		app.init();
 		$('#reviewTest').raty({ score: 4 });
 		$('#reviewTest2').raty({ score: 5 });
 		$('#reviewTest3').raty({ score: 4 });

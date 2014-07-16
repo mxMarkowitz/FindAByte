@@ -18,14 +18,14 @@ function openLeftMenu(){
 }
 
 function openRightMenu(){
-	overlay.show();
+	overlay.show();	
 	rightMenu.show(1, function (){
 		rightMenu.animate({
 			right: 0
 		}, 200);
 	});
 }
-function closeMenu(){
+function closeMenu(callback){
 	overlay.hide();
 
 	if (rightMenu.is(':visible')){
@@ -33,12 +33,18 @@ function closeMenu(){
 			right: -250
 		}, 200, function(){
 			rightMenu.hide();
+			if (callback){
+				callback();
+			}
 		});
 	} else if (leftMenu.is(':visible')){
 		leftMenu.animate({
 			left: -250
 		}, 200, function(){
 			leftMenu.hide();
+			if (callback){
+				callback();
+			}
 		});
 	}
 

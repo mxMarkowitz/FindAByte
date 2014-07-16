@@ -13,8 +13,12 @@ function dataStore(){
  	 * @constructor Datastore
  	 */
 	this.initDataStore = function(){
-		if (this.getStore == undefined){
+		var tempStore = this.getStore();
+		if (tempStore == undefined){
 			this.createDataStore();
+		}
+		else{
+			this.dataStore = tempStore;
 		}
 	}
 	this.createDataStore = function(){
@@ -28,12 +32,11 @@ function dataStore(){
 	
 	//update store
 	this.updateDataStore = function(){
-		store.set('store', this.store);
+		store.set('store', this.dataStore);
 	}
 	//get store from storage
 	this.getStore = function(){
-		this.dataStore = store.get('store');
-		return this.dataStore;
+		return store.get('store');
 	}
 
 	//get list
@@ -52,7 +55,9 @@ function dataStore(){
 	*/
 	this.createList = function(listObject){
 		var id = this.createUUID();
+		listObject.id = id;
 		this.dataStore.lists[id] = listObject;
+		this.updateDataStore();
 		return id;
 	}
 	
@@ -60,34 +65,40 @@ function dataStore(){
 	this.editList = function(listObject){
 		var id = listObject.id;
 		this.dataStore.lists[id] = listObject;
+		this.updateDataStore();
 	}
 	
 	//delete list
 	this.deleteList = function(id){
 		delete this.dataStore.lists[id];
+		this.updateDataStore();
 	}
 	
 	//get item
 	this.getItem = function(id, list){
-		return this.dataStore.lists[list][id];
+		return this.dataStore.lists[list].items[id];
 	}
 	
 	//create item
 	this.createItem = function(item, list){
-		var id = this.createUUID();
-		this.dataStore.lists[list][id] = item;
-		return id;
+		var tempID = this.createUUID();
+		this.dataStore.lists[list].items[tempID] = item;
+		this.dataStore.lists[list].items[tempID].id = tempID;
+		this.updateDataStore();
+		return tempID;
 	}
 	
 	//edit item
 	this.editItem = function(item, list){
 		var id = item.id;
-		this.dataStore.lists[list][id] = item;
+		this.dataStore.lists[list].items[id] = item;
+		this.updateDataStore();
 	}
 	
 	//delete item
 	this.deleteItem = function(id){
-		delete this.dataStore.lists[list][id];
+		delete this.dataStore.lists[list].items[id];
+		this.updateDataStore();
 	}
 
 	//utility functions
@@ -117,6 +128,7 @@ function dataStore(){
 //foursquare
 //maps
 */
+/*
 var testItem = {
 	'name' : 'testItemName',
 	'location' : 'testLocation',
@@ -128,9 +140,14 @@ var testItem = {
 var testList = {
 	'name' : 'listName',
 	'description' : 'listDescription',
-	'items' : []
+	'items' : {}
 }
 var db = {};
+function initStore(){
+	db = new dataStore();
+	db.initDataStore();
+}
+
 function initTestStore(){
 	db = new dataStore();
 	db.initDataStore();
@@ -141,4 +158,4 @@ function initTestStore(){
 	var item3 = db.createItem(testItem,listId);
 	var item4 = db.createItem(testItem,listId);
 	var item5 = db.createItem(testItem,listId);
-}
+}*/

@@ -1,23 +1,46 @@
-//var listItems = {};
-//var list = '';
-
 function initList(){
-
 }
-function addItem(item, list){
+function addItem(item, list, editEvent){
 	var newItem = template;
 		newItem = newItem.replace('{{id}}', 'item_' + item.id)
 		newItem = newItem.replace('{{name}}', item.name);
 		newItem = newItem.replace('{{location}}', item.location);
-		newItem = newItem.replace('{{review}}', item.review + ' stars');
-		newItem = newItem.replace('{{styles}}', item.styles);
+		newItem = newItem.replace('{{rating}}', item.rating + ' stars');
+		newItem = newItem.replace('{{tags}}', item.tags);
 		newItem = newItem.replace('{{maps}}', item.maps);
 		newItem = newItem.replace('{{foursquare}}', item.foursquare);
 
 	//id for event
 	var tempId = '#item_' +item.id;
 	list.append(newItem);
-	initListCollapse($(tempId));
+	initItemEvents($(tempId), editEvent);
+	//initListCollapse($(tempId));
+}
+function updateItem(item, editEvent){
+	var newItem = template;
+		newItem = newItem.replace('{{id}}', 'item_' + item.id)
+		newItem = newItem.replace('{{name}}', item.name);
+		newItem = newItem.replace('{{location}}', item.location);
+		newItem = newItem.replace('{{rating}}', item.rating + ' stars');
+		newItem = newItem.replace('{{tags}}', item.tags);
+		newItem = newItem.replace('{{maps}}', item.maps);
+		newItem = newItem.replace('{{foursquare}}', item.foursquare);
+
+	var tempId = '#item_' +item.id;
+	$(tempId).replaceWith(newItem);
+	initItemEvents($(tempId), editEvent);
+	//initItemEvents($(tempId), editEvent);
+}
+function getListItemId(listItem){
+	return listItem.split('_')[1];
+}
+
+function removeItem(itemId, list){
+	$('#item_' + itemId).remove();
+};
+function initItemEvents(listItem, editEvent){
+	initListCollapse(listItem);
+	initEditButton(listItem, editEvent);
 }
 
 function initListCollapse(listItem){
@@ -26,7 +49,7 @@ function initListCollapse(listItem){
 	var mid = listItem.find('.listCont_midRow');
 	var bot = listItem.find('.listCont_botRow');
 	top.on('click', function() {
-
+		//add function to track when the animation is active
 		if (listItem.height() == 40){
 			mid.show();
 			bot.show();
@@ -42,6 +65,11 @@ function initListCollapse(listItem){
 		}
 	});
 }
+function initEditButton(listItem, event){
+	listItem.on('click', '.listCont_botRow_edit', function(){
+		event(listItem);
+	})
+}
 
 
 var template = '<div id="{{id}}" class="listContainer">' +
@@ -53,15 +81,18 @@ var template = '<div id="{{id}}" class="listContainer">' +
     			'{{location}}' +
     		'</div>' +
     		'<div class="listCont_topRow_review">' +
-    			'{{review}}' +
+    			'{{rating}}' +
     		'</div>' +
 		'</div>' +
 		'<div class="listCont_midRow">' +
   			'<div class="listCont_midRow_styles">' +
-  				'{{styles}}' +
+  				'{{tags}}' +
   			'</div>' +
 		'</div>' +
 		'<div class="listCont_botRow">' +
+			'<div class="listCont_botRow_edit">' +
+                'Edit' +
+  			'</div>' +
   			'<div class="listCont_botRow_maps">' +
   				'{{maps}}'
   			'</div>' +
@@ -77,20 +108,30 @@ function testAdd(){
 		id: 8,
 		name: 'testName',
 		location: 'testLocation',
-		review: 3,
-		styles: [ 'style1', 'style2', 'style3'],
+		rating: 3,
+		tags: [ 'style1', 'style2', 'style3'],
 		maps: 'testMapLink',
 		foursquare: 'testFSLink'
 	};
 
 	addItem(newItem, $('body'));
-
-}
-
-function testUpdate(){
-
 }
 
 function testRemove(){
+	//quick test of removal
+	removeItem(8, $('body'));
+}
 
+function testUpdate(){
+	var newItem ={
+		id: 8,
+		name: 'testName2',
+		location: 'testLocation2',
+		rating: 4,
+		tags: [ 'style12', 'style22', 'style32'],
+		maps: 'testMapLink2',
+		foursquare: 'testFSLink2'
+	};
+
+	updateItem(newItem, $('body'));
 }

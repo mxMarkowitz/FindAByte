@@ -30,6 +30,10 @@
 	height: 20px;
 	padding-bottom: 10px; 
 }
+.listCont_botRow_edit{
+	float: left;
+	margin-left: 10px;
+}
 .listCont_botRow_maps{
 	float: right;
 	margin-right: 10px;
