@@ -32,10 +32,12 @@ function updateItem(item, editEvent){
 	//initItemEvents($(tempId), editEvent);
 }
 function getListItemId(listItem){
+
 	return listItem.split('_')[1];
 }
 
 function removeItem(itemId, list){
+	
 	$('#item_' + itemId).remove();
 };
 function initItemEvents(listItem, editEvent){
@@ -47,21 +49,28 @@ function initListCollapse(listItem){
 	//console.log(listItem);
 	var top = listItem.find('.listCont_topRow');
 	var mid = listItem.find('.listCont_midRow');
+	var img = listItem.find('.listCont_imgCont');
 	var bot = listItem.find('.listCont_botRow');
 	top.on('click', function() {
 		//add function to track when the animation is active
-		if (listItem.height() == 40){
-			mid.show();
+		if (listItem.height() == 47){
 			bot.show();
+			img.show();
 			listItem.animate({
-				height: '+=60'
+				height: '+=53'
 			}, 200);
+			top.animate({
+				width: '-=34%'
+			}, 100);
 		} else if (listItem.height() == 100){
-			mid.hide();
 			bot.hide();
+			img.hide();
 			listItem.animate({
-				height: '-=60'
+				height: '-=53'
 			}, 200);
+			top.animate({
+				width: '+=34%'
+			}, 100);
 		}
 	});
 }
@@ -77,28 +86,22 @@ var template = '<div id="{{id}}" class="listContainer">' +
   			'<div class="listCont_topRow_name">' +
     			'{{name}}'+
     		'</div>'+
-  			'<div class="listCont_topRow_location">'+
+    		'<div class="listCont_topRow_location">' +
     			'{{location}}' +
     		'</div>' +
     		'<div class="listCont_topRow_review">' +
     			'{{rating}}' +
     		'</div>' +
 		'</div>' +
-		'<div class="listCont_midRow">' +
-  			'<div class="listCont_midRow_styles">' +
-  				'{{tags}}' +
-  			'</div>' +
+		'<div class="listCont_imgCont">' +
 		'</div>' +
 		'<div class="listCont_botRow">' +
 			'<div class="listCont_botRow_edit">' +
                 'Edit' +
   			'</div>' +
-  			'<div class="listCont_botRow_maps">' +
-  				'{{maps}}'
+  			'<div class="listCont_botRow_styles">' +
+  				'{{tags}}' +
   			'</div>' +
-			'<div class="listCont_botRow_fourSquare">' +
-				'{{foursquare}}' +
-			'</div>' +
 		'</div>' +
 	'</div>';
 
@@ -111,7 +114,8 @@ function testAdd(){
 		rating: 3,
 		tags: [ 'style1', 'style2', 'style3'],
 		maps: 'testMapLink',
-		foursquare: 'testFSLink'
+		description: 'testFSLink',
+		photo: '' 
 	};
 
 	addItem(newItem, $('body'));

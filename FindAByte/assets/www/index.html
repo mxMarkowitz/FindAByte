@@ -31,11 +31,10 @@
 		    font-family: Verdana;
 		    font-size: 11px;
 		    color: #666;
-		    //width: 100%;
+		    background: #f1f1f1;
+			margin: 0;
 		}
-		thead {
-			//background: #e0e0e0;
-		}
+		/* Menu bar */
 		.menuBar{
 			height: 50px;
 			width: 100%;
@@ -43,6 +42,8 @@
 			float: left;
 			position: relative;
 			text-align: center;
+			background: #3FC380;
+			color: white;
 		}
 		.menuButton{
 			float: right;
@@ -54,12 +55,6 @@
 		.menuButton:active{
 			background: lightgray;
 			color: white;
-		}
-		.reviewHead{
-			//padding: .5em 2em;
-		}
-		select{
-			color: #666;
 		}
 		.selectContainer{
 			width: 70%;
@@ -79,8 +74,10 @@
 			-webkit-appearance: none;
 			text-align: center;
 			margin: 0 auto;
+			color: white;
 		}
 
+		/* Side Menus */
 		.ui-dialog{
 			//display: none;
 			position: absolute;
@@ -185,7 +182,6 @@
     		height: inherit;
     		opacity: 0;
 		}
-
 	</style>
 </head>
 <body>
@@ -262,7 +258,7 @@
     					<label for="review">Location</label>
     				</div>
     				<div class="dialog-form-input-contatiner">
-    					<input type="text" name="location" id="editLocation" value="" class="text ui-	widget-content ui-corner-all">
+    					<input type="text" name="location" id="editLocationInput" value="" class="text ui-	widget-content ui-corner-all">
     				</div>
     			</div>
   			</fieldset>
@@ -338,6 +334,24 @@
   		  	<div class="menu-item-icon right">Icon</div>
   			<div class="menu-item-text right">List</div>
   			<div class="menu-item-overlay right" onclick="openAddListPopup()"></div>
+  		</div>
+  		<div class="menu-title right">
+    		<!--<div class="menu-title-icon right"></div>-->
+    		<div class="menu-title-text right">Modify...</div>
+    	</div>
+  		<div class="menu-item right">
+  		  	<div class="menu-item-icon right">Icon</div>
+  			<div class="menu-item-text right">List</div>
+  			<div class="menu-item-overlay right" onclick=""></div>
+  		</div>
+  		<div class="menu-title right">
+    		<!--<div class="menu-title-icon right"></div>-->
+    		<div class="menu-title-text right">Delete...</div>
+    	</div>
+    	<div class="menu-item right">
+  		  	<div class="menu-item-icon right">Icon</div>
+  			<div class="menu-item-text right">List</div>
+  			<div class="menu-item-overlay right" onclick=""></div>
   		</div>
   		<div class="menu-item-bottom right">
   		  	<div class="menu-item-icon right"></div>
