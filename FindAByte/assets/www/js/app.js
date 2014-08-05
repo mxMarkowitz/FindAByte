@@ -20,23 +20,14 @@ var app= {};
 //init function
 app.init = function (){
 	//read db from file
-
 	initAddItemDialog();
 	initAddListDialog();
 	initEditItemDialog();
-	//initMenuButton();
-	//OnListChange();
+	initListSelectDialog();
 	initMenus();
 	db = new dataStore();
-	//db.initDataStore();
-	//for testing
-	//db.destroyDataStore();
 	db.initDataStore();
 	populateSel();
-	//testInit();
-	//initItemEvents($('#item_2'), openEditItemPopop);
-	//initItemEvents($('#item_3'), openEditItemPopop);
-	//initItemEvents($('#item_4'), openEditItemPopop);
 }
 function populateSel(){
 	var lists = db.getAllLists();
@@ -51,12 +42,22 @@ function populateSel(){
 		populateList(listId);
 	})
 }
+function populateSelectPopup(){
+	var lists = db.getAllLists();
+	var container = $('#listSelectContainer');
+	for (var prop in lists){
+		container.append($('<div>')
+							.attr('value', prop)
+							.html('<div>' + lists[prop].name + '</div><div> ' + lists[prop].description + '</div>'));
+	}
+}
+
 function populateList(list){
-	$('body div[class="listContainer"]').remove();
+	$('#listCard div[class="listContainer"]').remove();
 	var vals = db.getList(list).items;
 	for (var prop in vals){
 		if (typeof vals[prop] === 'object'){
-			addItem(vals[prop], $('body'), openEditItemPopop);
+			addItem(vals[prop], $('#listCard'), openEditItemPopop);
 		}
 	}
 }
@@ -160,6 +161,19 @@ function initEditItemDialog(){
 		}
 	});
 }
+function initListSelectDialog(){
+	$('#listSelectDialog').dialog({
+		autoOpen: false,
+		position: { my: 'top+20', at: 'top', of: window },
+		modal: false,
+		buttons: {
+			'close': function (){
+				$( this ).dialog( "close" );
+			}
+		}
+	})
+}
+
 function initAddItemDialog(){
 	$('#addItemDialog').dialog({
 		autoOpen: false,
@@ -178,7 +192,7 @@ function initAddItemDialog(){
 				}
 				var id = db.createItem(newItem, listId);
 				newItem.id = id;
-				addItem(newItem, $('body'), openEditItemPopop);
+				addItem(newItem, $('#listCard'), openEditItemPopop);
 				//clear form
 				$("#addItemDialog :input").each(function(){
 					$(this).val('');
@@ -228,6 +242,19 @@ function initAddListDialog(){
 }
 
 //Popup opening functions
+function openListSelect(){
+	closeMenu(function(){
+		var tempheight = $(document).height()-50;
+		var tempwidth = $(document).width()-30;
+		$('#listSelectDialog').dialog({
+			height: tempheight,
+			width: tempwidth
+		});
+		populateSelectPopup();
+		$('#listSelectDialog').dialog('open');
+	});
+}
+
 function openAddItemPopup(){
 	closeMenu(function(){
 		var tempheight = $(document).height()-50;

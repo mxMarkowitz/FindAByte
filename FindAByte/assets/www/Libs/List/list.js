@@ -60,7 +60,7 @@ function initListCollapse(listItem){
 				height: '+=53'
 			}, 200);
 			top.animate({
-				width: '-=34%'
+				width: '-=25%'
 			}, 100);
 		} else if (listItem.height() == 100){
 			bot.hide();
@@ -69,7 +69,7 @@ function initListCollapse(listItem){
 				height: '-=53'
 			}, 200);
 			top.animate({
-				width: '+=34%'
+				width: '+=25%'
 			}, 100);
 		}
 	});

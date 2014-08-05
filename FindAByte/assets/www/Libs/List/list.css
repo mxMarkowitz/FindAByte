@@ -37,14 +37,13 @@
 }
 .listCont_botRow{
 	float: left;
-	width: 60%;
+	width: 69%;
 	display: none;
+	padding-left: 10px;
 }
 .listCont_botRow_edit{
 	float: left;
-	margin-left: 10px;
 }
 .listCont_botRow_styles{
 	float: right;
-	margin-right: 10px;
 }

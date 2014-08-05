@@ -76,6 +76,7 @@ function dataStore(){
 	
 	//get item
 	this.getItem = function(id, list){
+		
 		return this.dataStore.lists[list].items[id];
 	}
 	

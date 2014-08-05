@@ -1,5 +1,8 @@
 <html><head>
 	<style type="text/css">
+		html{
+			font-family: 'Muli', sans-serif;
+		}
 		h2 {
 			margin: 0 0 5px 0;
 		}
@@ -28,21 +31,35 @@
 		    text-align: left;
 		}
 		body {
-		    font-family: Verdana;
+		    /*font-family: Verdana;*/
 		    font-size: 11px;
 		    color: #666;
 		    background: #f1f1f1;
 			margin: 0;
 		}
+		.loadingOverlay{
+    		width: 100%;
+    		height: 100%;
+    		z-index: 900;
+    		float: left;
+    		position: absolute;
+    		background: #2cc26b;
+			color: white;      
+    		/* opacity: .5; */
+    		line-height: 500px;
+    		text-align: center;
+    		font-weight: bold;
+    		font-size: 20px;
+		}
+
 		/* Menu bar */
 		.menuBar{
 			height: 50px;
 			width: 100%;
-			margin-bottom: 10px;
 			float: left;
 			position: relative;
 			text-align: center;
-			background: #3FC380;
+			background: #2cc26b;
 			color: white;
 		}
 		.menuButton{
@@ -182,9 +199,17 @@
     		height: inherit;
     		opacity: 0;
 		}
+		.listCard{
+			top: 50;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			float: left;
+		}
 	</style>
 </head>
 <body>
+	<div class="loadingOverlay">Loading</div>
 	<div id="addItemDialog" class="dialog-Form" title="Create new item">
   		<p class="validateTips">Add a new location</p>
   		<form>
@@ -285,6 +310,14 @@
 			</fieldset>
 		</form>
 	</div>
+	<div id="listSelectDialog" class="dialog-Form" title="Select a list">
+		<p class="validateTips">Select a list</p>
+		<form>
+			<fieldset>
+				<div id="listSelectContainer"></div>
+			</fieldset>
+		</form>
+	</div>
 	<div class="menuBar">
 		<div class="menuButton" onclick="openLeftMenu()" style="float: left">
 			Menu
@@ -307,7 +340,7 @@
   		<div class="menu-item left">
   		  	<div class="menu-item-icon left">Icon</div>
   			<div class="menu-item-text left">Change List</div>
-  			<div class="menu-item-overlay left"></div>
+  			<div class="menu-item-overlay left" onclick="openListSelect()"></div>
   		</div>
   		<div class="menu-item left">
   		  	<div class="menu-item-icon left">Icon</div>
@@ -360,6 +393,10 @@
   		</div>
 	</div>
 
+	<div id="listCard" class="listCard">
+		
+	</div>
+
 	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="js/store.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
@@ -373,13 +410,14 @@
 
 	<link rel="stylesheet" href="Libs/List/list.css">
 	<script type="text/javascript" src="Libs/List/list.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
   
 	<script type="text/javascript">
 			
 		app.init();
-		$('#reviewTest').raty({ score: 4 });
-		$('#reviewTest2').raty({ score: 5 });
-		$('#reviewTest3').raty({ score: 4 });
-		$('#reviewTest4').raty({ score: 0 });
+		
+		$document.ready(function(){
+			$('.loadingOverlay').hide();
+		});
 	</script>
 </body></html>
