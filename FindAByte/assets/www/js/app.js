@@ -116,6 +116,7 @@ function initCheckEvent(){
 	})
 }
 function parseListId(id){
+	
 	return id.trimLeft('item_');
 }
 function populateListSelect(){
