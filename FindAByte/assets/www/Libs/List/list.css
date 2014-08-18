@@ -1,9 +1,11 @@
 .listContainer{
-	width: 96%;
+	width: 98%;
 	height: 47px;
 	border-bottom: 1px solid lightgray;
 	float: left;
-	margin: 2% 2% 0px;
+	margin-top: 5px;
+	margin-left: 1%;
+	margin-right: 1%;
 	background: white;
 }
 .listCont_topRow{
@@ -27,8 +29,9 @@
 }
 .listCont_imgCont{
 	height: 100%;
+	max-width: 100px;
+	min-width: 100px;
 	float: right;
-	min-width: 25%;
 	background: pink;
 	display: none;
 }
@@ -37,12 +40,21 @@
 }
 .listCont_botRow{
 	float: left;
-	width: 69%;
+	width: 67%;
 	display: none;
 	padding-left: 10px;
 }
 .listCont_botRow_edit{
 	float: left;
+	width: 42px;
+	height: 30px;
+	margin-left: -10px;
+	text-indent: 10px;
+	margin-top: -10px;
+	line-height: 30px;
+}
+.listCont_botRow_edit:active{
+	background: lightgray;
 }
 .listCont_botRow_styles{
 	float: right;

@@ -60,7 +60,7 @@ function initListCollapse(listItem){
 				height: '+=53'
 			}, 200);
 			top.animate({
-				width: '-=25%'
+				width: '-=27%'
 			}, 100);
 		} else if (listItem.height() == 100){
 			bot.hide();
@@ -69,9 +69,16 @@ function initListCollapse(listItem){
 				height: '-=53'
 			}, 200);
 			top.animate({
-				width: '+=25%'
+				width: '+=27%'
 			}, 100);
 		}
+	});
+	var timeoutId = 0;
+	top.mousedown(function() {
+    	timeoutId = setTimeout(function(){ alert('tes') }, 1000);
+
+		}).bind('mouseup mouseleave', function() {
+    		clearTimeout(timeoutId);
 	});
 }
 function initEditButton(listItem, event){

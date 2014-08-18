@@ -9,21 +9,54 @@ function initMenus(){
 }
 
 function openLeftMenu(){
-	overlay.show();
-	leftMenu.show(1, function (){
-		leftMenu.animate({
-			left: 0
-		}, 200);
-	});
+	if (overlay.is(':visible')){
+		if (leftMenu.is(':visible')){
+			closeMenu();
+		} else{
+			closeMenu(function(){
+				overlay.show();
+				leftMenu.show(1, function (){
+					leftMenu.animate({
+						left: 0
+					}, 200);
+				});
+			});
+		}
+	}
+	else{
+		overlay.show();
+		leftMenu.show(1, function (){
+			leftMenu.animate({
+				left: 0
+			}, 200);
+		});
+
+	}
 }
 
 function openRightMenu(){
-	overlay.show();	
-	rightMenu.show(1, function (){
-		rightMenu.animate({
-			right: 0
-		}, 200);
-	});
+	if (overlay.is(':visible')){
+		if (rightMenu.is(':visible')){
+			closeMenu();
+		} else{
+			closeMenu(function(){
+				overlay.show();	
+				rightMenu.show(1, function (){
+					rightMenu.animate({
+						right: 0
+					}, 200);
+				});
+			});
+		}
+	}
+	else{
+		overlay.show();	
+		rightMenu.show(1, function (){
+			rightMenu.animate({
+				right: 0
+			}, 200);
+		});
+	}
 }
 function closeMenu(callback){
 	overlay.hide();

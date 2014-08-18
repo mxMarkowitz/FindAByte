@@ -116,7 +116,7 @@ function initCheckEvent(){
 	})
 }
 function parseListId(id){
-	
+
 	return id.trimLeft('item_');
 }
 function populateListSelect(){
@@ -264,6 +264,9 @@ function openAddItemPopup(){
 			height: tempheight,
 			width: tempwidth
 		});
+		$('#addItemDialog').on('shown.bs.modal', function () {
+			$('#name').focus();
+		});
 		$('#addItemDialog').dialog('open');
 	});
 }
@@ -291,6 +294,9 @@ function openAddListPopup(){
 		$('#listCreation-form').dialog({
 			height: tempheight,
 			width: tempwidth
+		});
+		$('#listCreation-form').on('shown.bs.modal', function () {
+			$('#nameListInput').focus();
 		});
 		$('#listCreation-form').dialog('open');
 	});
